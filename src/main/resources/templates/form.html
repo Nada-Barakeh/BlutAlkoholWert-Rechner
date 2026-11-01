@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>BlutAlkoholRechner</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>BlutAlkohol Rechner</h1>
+
+    <form th:action="@{/}" th:object="${alkoholForm}" method="post">
+
+        <!-- ===== Geschlecht ===== -->
+         <div class="mb-3">
+            <label>Geschlecht:</label>
+            <select th:field="*{geschlecht}" >
+
+                <option th:each="g : ${T(de.hhu.pp2.blutalkoholwert.Geschlecht).values()}"
+                        th:value="${g}"
+                        th:text="${g}">
+                </option>
+
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('geschlecht')}" th:errors="*{geschlecht}">Name Error</small>
+        </div>
+
+        <!-- ===== Gewicht ===== -->
+        <div class="mb-3">
+            <label for="id_Gewicht">Gewicht(Kg):</label>
+            <input id="id_Gewicht"  type="number" step="0.1" th:field="*{gewicht}">
+            <small class="text-danger" th:if="${#fields.hasErrors('gewicht')}" th:errors="*{gewicht}">Name Error</small>
+        </div>
+
+
+        <!--  ===== Bier ===== -->
+        <div class="mb-3">
+            <label for="id_Bier">Bier(ml):</label>
+            <input id="id_Bier"  type="number" step="0.1" th:field="*{bier}">
+            <small class="text-danger" th:if="${#fields.hasErrors('bier')}" th:errors="*{bier}">Name Error</small>
+
+        </div>
+
+        <!--  ===== Wein ===== -->
+       <div class="mb-3">
+            <label for="id_Wein">Wein(ml):</label>
+            <input id="id_Wein"  type="number" step="0.1" th:field="*{wein}">
+            <small class="text-danger" th:if="${#fields.hasErrors('wein')}" th:errors="*{wein}">Name Error</small>
+        </div>
+
+
+        <!-- ===== Korn ===== -->
+        <div class="mb-3">
+            <label for="id_Korn">Korn(ml):</label>
+            <input id="id_Korn"  type="number" step="0.1" th:field="*{korn}">
+            <small class="text-danger" th:if="${#fields.hasErrors('korn')}" th:errors="*{korn}">Name Error</small>
+        </div>
+
+       <!--  ===== Vodka ===== -->
+        <div class="mb-3">
+            <label for="id_Vodka">Vodka(ml):</label>
+            <input id="id_Vodka"  type="number" step="0.1" th:field="*{vodka}">
+            <small class="text-danger" th:if="${#fields.hasErrors('vodka')}" th:errors="*{vodka}">Name Error</small>
+
+        </div>
+
+        <!--  ===== Whiskey ===== -->
+        <div class="mb-3">
+            <label for="id_Whiskey">Whiskey(ml):</label>
+            <input id="id_Whiskey"  type="number" step="0.1" th:field="*{whiskey}">
+            <small class="text-danger" th:if="${#fields.hasErrors('whiskey')}" th:errors="*{whiskey}">Name Error</small>
+        </div>
+
+
+        <div class="mb-3">
+            <button type="submit" class="btn-primary">Berechnen</button>
+        </div>
+
+    </form>
+</div>
+
+
+<!-- === Result === -->
+<div th:if="${blutAlkoholwert != null}">
+    <strong>Blutalkoholwert:</strong>
+    <span th:text="${#numbers.formatDecimal(blutAlkoholwert, 1, 2)}"></span>%
+</div>
+
+</body>
+</html>
