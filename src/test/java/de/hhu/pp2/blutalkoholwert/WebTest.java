@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -49,15 +50,20 @@ public class WebTest {
     @Test
     @DisplayName("ValidiationsFehler -->Post")
     void test3() throws Exception {
-        mvc.perform(post("/")
-                .param("geschlecht" ,"FRAUEN")
-                .param("gewicht" , "-10") // -ve gewicht
+
+          mvc.perform(new AlkoholRequestBuilder()
+                        .geschlecht(Geschlecht.FRAUEN)
+                        .gewicht(-10.00)
+                        .build())
+
+              /*  .param("gewicht" , "-10") // -ve gewicht
                 .param("bier" , "500")
                 .param("wein", "0")
                 .param("korn", "0")
                 .param("vodka", "0")
                 .param("whiskey", "0")
-                )
+                )*/
+
                 .andExpect(status().isOk())
                 .andExpect(view().name("form"))
 
