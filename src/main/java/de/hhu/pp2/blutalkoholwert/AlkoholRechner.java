@@ -17,7 +17,7 @@ public static double blutAlkoholWert(AlkoholForm alkohol){
     alkoholMenge += alkohol.getVodka() * 0.40 * ALKOHOLDICHTE;
     alkoholMenge += alkohol.getWhiskey() * 0.43 * ALKOHOLDICHTE;
 
-    double redFaktor = alkohol.getGeschlecht().getRedfaktor();
+    double redFaktor = alkohol.getGeschlecht().getRedfaktor(); // LoD verletzt
 
     return alkoholMenge / (alkohol.getGewicht()*redFaktor);
 
